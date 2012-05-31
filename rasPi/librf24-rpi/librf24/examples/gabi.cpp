@@ -78,6 +78,7 @@ RF24 radio("/dev/spidev0.0",2000000 , 25);  //spi device, speed and CSN,only CSN
 
 // Radio pipe addresses for the 2 nodes to communicate.
 const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
+//const uint64_t pipes[2] = { 0x0000001CLL, 0x6C6C6C6CLL };
 unsigned int package;
 
 void setup(void)
@@ -459,7 +460,7 @@ int main(int argc, char** argv)
 	if ( argc != 3 ) /* argc should be 2 for correct execution */
 	{
 		/* We print argv[0] assuming it is the program name */
-		printf( "usage: %s [Status/oN/ofF/aliVe/Minutes/Hours] Slave_ID\n\r", argv[0] );
+		printf( "usage: %s [Status/oN/ofF/aliVe/Minutes/Hours/Time/temperture C] Slave_ID\n\r", argv[0] );
 		return -1;
 	}
 
