@@ -124,35 +124,11 @@ void update_lcd_clock_print()
 
 void update_working_char()
 {
-	working_char++;
-	if (working_char > 4) working_char=1;
+	add_special_char(0,hebrew[SPECIAL_START+working_char]);
 	gabi_goto(15,0);
-	switch (working_char) {
-		case 1:
-		{
-			gabi_data('/');
-			break;
-		}
-		case 2:
-		{
-			gabi_data('-');
-			break;
-		}
-		case 3:
-		{
-			gabi_data('\\');
-			break;
-		}
-		case 4:
-		{
-			gabi_data('|');
-			break;
-		}
-		default:
-		{
-			break;
-		}
-	}
+	gabi_data(0);	
+	working_char++;
+	if (working_char > 3) working_char=0;
 }
 
 ISR(TIMER2_COMPA_vect)          // timer compare interrupt service routine

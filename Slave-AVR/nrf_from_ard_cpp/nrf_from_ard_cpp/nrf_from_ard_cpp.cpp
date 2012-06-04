@@ -1,7 +1,7 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	2.0
+Firmware	:	2.01
 Date		:	07/07/14
 
 ToDO:
@@ -13,12 +13,19 @@ V 1.9	get temperture in C
 V 1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
 V 1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
 V 1.93	Piezo on power on/off
-? 1.94	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
-? 2.0	test all and remove print_read_write and printDetails on RPi
+V 1.94	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
+V 2.0	test all and remove print_read_write and printDetails on RPi
+V 2.01	Special char for ON
+V 2.011 Hebrew chars
+V 2.012 Hebrew - Print on start the Welcome
+X 2.02	save last DDRAM pos and back to is after adding CGRAM char (instead of 0x80)
+  2.021 Change DEBUG to second line alone (leave first line)
+  2.022 Change On Off to Hebrew, and move SPECIAL CHAR to 0,0
+  2.03	turn off lcd blinking , test all, and turn DEBUG off.
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "2.0"
+#define META_FIRMWARE "2.01"
 
 #define F_CPU 1000000
 
@@ -97,6 +104,7 @@ void print_read_write(int read_write, unsigned long pkg);
 // Set up nRF24L01 radio on SPI bus plus pins 9 & 10
 RF24 radio(0,0);
 int seq, pressed_counter, release_counter, button_last;
+int DEBUG_BIT;
 
 // Radio pipe addresses for the 2 nodes to communicate.
 const uint64_t pipes[2] = { 0xf0f0f0f0e1, 0xf0f0f0f0d2 };
@@ -123,14 +131,63 @@ void print_startup()
 {
 	gabi_clear();
 	_delay_ms(20);
-	print_full_char(5);
-	gabi_string((char*)"Welcome");
-	print_full_char(4);
+// 	for (int i=0 ; i<27 ; i++)
+// 	{
+// 		int x=i;
+// 		int y=0;
+// 		if (i>=16) {
+// 			x=i-16;
+// 			y=1;
+// 		}
+// 		add_special_char(5,hebrew[i]);
+// 		gabi_goto(x,y);
+// 		gabi_data(5);
+// 		//_delay_ms(500);
+// 	}
+// 	gabi_goto(12,1);
+// 	gabi_data(0);
+// 	gabi_data(1);
+// 	gabi_data(2);
+// 	gabi_data(3);
+// 	_delay_ms(DELAY_LCD_PRINT*2);
+//	gabi_home();
+	//gabi_goto(0,0);
+	//gabi_clear();
+	
+	print_full_char(6);
+	int heb_shalom[5] = {SHIN,LAMED,VAV,FINAL_MEM};
+	int heb_gabi[4] = {GIMEL,BET,YOD};
+	for (int i=0 ; i<3 ; i++)
+	{
+		add_special_char(i+5,hebrew[heb_gabi[i]]);
+	}	
+	gabi_heb(6,0,4,heb_shalom);
+	//gabi_string((char*)"Welcome");
+	print_full_char(6);
+	
+	//_delay_ms(DELAY_LCD_PRINT*2);
+	gabi_home();
 	gabi_goto(0,1);
-	print_full_char(5);
-	gabi_string((char*)"Gabi");
 	print_full_char(7);
+	//gabi_heb(7,1,3,heb_gabi);
+	int x=7;
+	for (int i=2 ; i>=0 ; i--)
+	{
+		gabi_goto(x++,1);
+		gabi_data(i+5);
+	}	
+	//gabi_string((char*)"Gabi");
+	print_full_char(6);
 	_delay_ms(DELAY_LCD_PRINT);
+	
+	gabi_home();
+	working_char=0;
+	for (int i=0 ; i<4 ; i++ ) 
+	{
+		update_working_char();
+		_delay_ms(500);
+	}
+	
 	gabi_clear();	
 	gabi_string((char*)META_TYPE);
 	gabi_data(' ');
@@ -180,6 +237,8 @@ void setup(void)
 {
 	lcd_init();
 	gabi_home();
+// 	for (int i=0 ; i<4 ; i++) add_special_char(i,special_char[i]);	
+// 	gabi_home();
 	init_relays();
 	// Setup and configure rf radio
 	radio.begin();
@@ -207,10 +266,12 @@ void setup(void)
 	pressed_counter = 0;
 	release_counter = 0;
 	button_last=0;
-	
+
+DEBUG_BIT=1;	
 	print_startup();
 	start_timer1();
 //	toggle=0;
+
 }
 
 int check_button_pressed()
@@ -228,6 +289,7 @@ int check_button_pressed()
 	return 0;
 }
 
+
 int write_data(unsigned long pkg) {
 	_delay_ms(1);
 	int  retry;
@@ -243,7 +305,7 @@ int write_data(unsigned long pkg) {
 	}
 	radio.startListening();
 
-//	print_read_write(W,pkg);
+	if (DEBUG_BIT == 1) print_read_write(W,pkg);
 
 	return ret_val;
 }
@@ -301,23 +363,7 @@ void loop(void)
 		uint8_t cur_id = ((got_pkg >> ID_BIT) & ID_MASK);
 		
 		//write_data(got_pkg);
-//		if (got_pkg != 0xFFFFFFFF) print_read_write(R,got_pkg);
-
-
-// 		 
-//   		char data_str[8];
-//   		itoa(cur_data,data_str,16);
-// 		gabi_string(data_str);
-// 		
-// 		gabi_goto(4,1);
-// 		char rw_str[8];
-// 		itoa(cur_rw,rw_str,16);
-// 		gabi_string(rw_str);
-// 		gabi_string((char*)" ");
-// 		
-// 		char id_str[8];
-// 		itoa(cur_id,id_str,16);
-// 		gabi_string(id_str);
+		if (DEBUG_BIT == 1) if (got_pkg != 0xFFFFFFFF) print_read_write(R,got_pkg);
 
 		if (cur_seq == seq) {
 			switch (seq) {
@@ -363,11 +409,6 @@ void loop(void)
 									write_data(tmp_payload);
 									reset_seq();
 									break;
-// 								case P_TIME_MIN:
-// 									read_val=p_min;
-// 									write_data((seq << SEQ_BIT) | (R) | (read_val));
-// 									reset_seq();
-// 									break;
 								case R_STATUS: // status - alive
 									read_val = 1;
 									tmp_payload = (((uint32_t)(seq & SEQ_MASK) << SEQ_BIT) | ((uint32_t)(MY_ID & ID_MASK) << ID_BIT) | ((uint32_t)(R & RW_MASK) << RW_BIT) | ((uint32_t)(read_val & STAT_MASK) << STAT_BIT));
@@ -383,64 +424,8 @@ void loop(void)
 									break;
 							}							
 						}
-// 						write_data(got_pkg);
-// 						seq++;
 					}
 					break;
-//				case 2:
-				// HERE the stuff going --- First Write, Else Read.
-//				unsigned long cmd;
-//				cmd = (got_pkg & CMD_MASK);
-// 				if (got_pkg & W) // Write if true, Read false
-// 				{
-// 					switch (cmd) {
-// 						case OFF:
-// 							write_data(got_pkg);
-// 							stop_timer2();
-// 							reset_seq();
-// 							relays_power_off();
-// 							break;
-// 						case ON:
-// 							start_timer2();
-// 							write_data(got_pkg);
-// 							reset_seq();
-// 							relays_power_on();
-// 							break;
-// 						default:
-// 							break;
-// 					}
-// 				}
-// 				else
-// 				{
-// 					uint8_t read_val;
-// 					switch (cmd) {
-// 						case PWR_STT:
-// 							read_val = get_relay1_emr_state();
-// 							write_data((seq << SEQ_BIT) | (R) | (read_val));
-// 							reset_seq();
-// 							break;
-// 						case P_TIME_HOUR:
-// 							read_val=p_hour;
-// 							write_data((seq << SEQ_BIT) | (R) | (read_val));
-// 							reset_seq();
-// 							break;
-// 						case P_TIME_MIN:
-// 							read_val=p_min;
-// 							write_data((seq << SEQ_BIT) | (R) | (read_val));
-// 							reset_seq();
-// 							break;
-// 						case R_STATUS: // status - alive
-// 							read_val = 1;
-// 							write_data((seq << SEQ_BIT) | (R) | (read_val));
-// 							reset_seq();
-// 							break;
-// 						default:
-// 							break;
-// 					}
-// 				}
-// 				break;
-// 				default:
-// 				break;
  			}
  		} else {
  			reset_seq();
