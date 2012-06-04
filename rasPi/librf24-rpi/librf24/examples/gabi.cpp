@@ -111,7 +111,7 @@ setvbuf (stdout, NULL, _IONBF, 0);
   radio.startListening();
 
   // Dump the configuration of the rf unit for debugging
-  radio.printDetails();
+//  radio.printDetails();
 }
 
 void print_seq_id(unsigned long pkg) 
@@ -478,32 +478,6 @@ int main(int argc, char** argv)
         int not_done = 1;
 
 	switch(choice) {
-/*
-		case 'm':
-                {
-                        cur_retry = 0;
-                        not_done = -1;
-                        while ((not_done<0) && (cur_retry < max_retry)) {
-                                not_done = check_power_minutes(slave_id);
-                                cur_retry++;
-                                printf("\n\r");
-                                sleep(1);
-                        }
-                        break;
-                }
-		case 'h':
-                {
-                        cur_retry = 0;
-                        not_done = -1;
-                        while ((not_done<0) && (cur_retry < max_retry)) {
-                                not_done = check_power_hours(slave_id);
-                                cur_retry++;
-                                printf("\n\r");
-                                sleep(1);
-                        }
-                        break;
-                }
-*/
                 case 't':
                 {
                         cur_retry = 0;
@@ -514,6 +488,7 @@ int main(int argc, char** argv)
                                 printf("\n\r");
                                 sleep(1);
                         }
+			printf("%i",not_done);
                         break;
                 }
 		case 's':
@@ -526,6 +501,7 @@ int main(int argc, char** argv)
 				printf("\n\r");
 				sleep(1);
 			}
+			printf("%i",not_done);
 			break;
 		}
 		case 'n':
@@ -538,7 +514,7 @@ int main(int argc, char** argv)
 				printf("\n\r");
 				sleep(1);
 			}
-
+			printf("%i",not_done);
 			break;
 		}
 		case 'f':
@@ -551,6 +527,7 @@ int main(int argc, char** argv)
 				printf("\n\r");
 				sleep(1);
 			}
+			printf("%i",not_done);
 			break;
 		}
 		case 'v':
@@ -576,6 +553,7 @@ int main(int argc, char** argv)
 				printf("\n\r");
 				sleep(1);
 			}
+			printf("%i",not_done);
 			break;
 		}
 		default:
