@@ -41,7 +41,11 @@
 #define STAT_BIT 0
 #define STAT_MASK 1
 
+#define TEMP_MASK 0x7F // 7 bit
+#define TEMP_BIT 0
+
 //commands:
+//	send temp	seq- id-- r/w                  ... ....			.=Temperture (0-127)
 //  send stat   seq- Id-- r/w                         .			 .=On/Off (1/0)
 //  send time   seq- Id-- r/w               | ||.. ....			 |=hours, .=minutes
 //  to me       seq- Id-- r/w                      -cmd
@@ -57,6 +61,7 @@
 #define PWR_STT 0x0 // Read Power State = ....0000
 #define P_TIME 0b0110 // Read Power On Timer 
 #define R_STATUS 0xF // Alive status = ....1111
+#define R_TEMP	0b1000	// Get temperture = ....1000
 
 int write_command(int slave_id, uint8_t command);
 int read_command(int slave_id, uint8_t query, uint32_t *data_buffer);
@@ -325,6 +330,20 @@ int check_power_hours(unsigned int slave_id)
 }
 */
 
+int check_temperture(unsigned int slave_id)
+{
+	uint32_t data_buff = 0;
+	int comm_stat = read_command(slave_id, R_TEMP, &data_buff);
+	if (comm_stat < 0)
+        {
+                printf(" slave failed on get Temperture. ");
+                return comm_stat;
+        }
+	int tempC = ((data_buff >> TEMP_BIT) & TEMP_MASK);
+        printf("(got %zu) Temperture %i°C", comm_stat, tempC);
+        return tempC;
+}
+
 int check_power_time(unsigned int slave_id)
 {
 	uint32_t data_buff = 0;
@@ -544,6 +563,18 @@ int main(int argc, char** argv)
 				alive=check_alive(i);
 				if (alive) printf("%i alive. ", i);
 				printf("\n\r");
+			}
+			break;
+		}
+		case 'C':
+		{
+			cur_retry = 0;
+			not_done = -1;
+			while ((not_done<0) && (cur_retry < max_retry)) {
+				not_done = check_temperture(slave_id);
+				cur_retry++;
+				printf("\n\r");
+				sleep(1);
 			}
 			break;
 		}
