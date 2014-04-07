@@ -18,8 +18,8 @@ Date		:	07/07/14
 #include <stdlib.h>
 #include "lcd/lcd_lib.h"
 #include "spi/spi.h"
-#include "timers/timers.h"
 #include "relay/relay.h"
+#include "timers/timers.h"
 #include "misc/sensors.h"
 
 
@@ -82,14 +82,14 @@ int seq, pressed_counter, release_counter, button_last;
 // Radio pipe addresses for the 2 nodes to communicate.
 const uint64_t pipes[2] = { 0xf0f0f0f0e1, 0xf0f0f0f0d2 };
 
-int toggle;
-void toggle_dot()
-{
-	gabi_goto(15,0);
-	if (toggle) gabi_data('.');
-	else gabi_data('|');
-	toggle^=1;
-}
+// int toggle;
+// void toggle_dot()
+// {
+// 	gabi_goto(15,0);
+// 	if (toggle) gabi_data('.');
+// 	else gabi_data('|');
+// 	toggle^=1;
+// }
 
 void reset_seq(){
 	seq=1;
@@ -191,7 +191,7 @@ void setup(void)
 	
 	print_startup();
 	start_timer1();
-	toggle=0;
+//	toggle=0;
 }
 
 int check_button_pressed()
@@ -241,6 +241,7 @@ void loop(void)
 				relays_power_off();
 			} else {
 				relays_power_on();
+				start_timer2();
 				update_lcd_clock_print();
 			}
 			button_last=1;
@@ -254,7 +255,7 @@ void loop(void)
 	{
 		update_lcd_lm35_print();
 		timer1_fire=0;
-		toggle_dot();
+//		toggle_dot();
 	}
 		
 	// if there is data ready
@@ -310,10 +311,10 @@ void loop(void)
 									relays_power_off();
 									break;
 								case ON:
-									start_timer2();
 									write_data(got_pkg);
 									reset_seq();
 									relays_power_on();
+									start_timer2();
 									update_lcd_clock_print();
 									break;
 								default:

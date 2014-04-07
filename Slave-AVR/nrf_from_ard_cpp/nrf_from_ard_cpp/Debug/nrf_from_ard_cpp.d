@@ -21,8 +21,8 @@ nrf_from_ard_cpp.d nrf_from_ard_cpp.o: .././nrf_from_ard_cpp.cpp \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/math.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/interrupt.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/stdlib.h \
- .././lcd/lcd_lib.h .././spi/spi.h .././timers/timers.h \
- .././timers/../relay/relay.h .././relay/relay.h .././misc/sensors.h
+ .././lcd/lcd_lib.h .././spi/spi.h .././relay/relay.h \
+ .././timers/timers.h .././timers/../relay/relay.h .././misc/sensors.h
 
 .././nrf/nRF24L01.h:
 
@@ -76,10 +76,10 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8
 
 .././spi/spi.h:
 
+.././relay/relay.h:
+
 .././timers/timers.h:
 
 .././timers/../relay/relay.h:
-
-.././relay/relay.h:
 
 .././misc/sensors.h:
