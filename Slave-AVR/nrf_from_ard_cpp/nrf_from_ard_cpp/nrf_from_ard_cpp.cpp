@@ -1,11 +1,12 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	1.7
+Firmware	:	1.8
+Date		:	07/07/14
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "1.7"
+#define META_FIRMWARE "1.8"
 
 #define F_CPU 1000000
 
@@ -65,12 +66,12 @@ void print_read_write(int read_write, unsigned long pkg);
 #define P_TIME 0b0110 // Read Power On Timer 
 #define R_STATUS 0xF // Alive status = ....1111
 
-#define DELAY_LCD_PRINT 1200
-#define BUTTON_DDR DDRB
-#define BUTTON_PORT PORTB
-#define BUTTON_PIN PB5
-#define BUTTON_INPORT PINB5
-#define DEBOUNCE_TIME 100
+#define DELAY_LCD_PRINT 1500
+#define BUTTON_DDR DDRC
+#define BUTTON_PORT PORTC
+#define BUTTON_PIN 5
+#define BUTTON_IN PINC
+#define DEBOUNCE_TIME 300
 
 // Hardware configuration
 
@@ -80,6 +81,15 @@ int seq, pressed_counter, release_counter, button_last;
 
 // Radio pipe addresses for the 2 nodes to communicate.
 const uint64_t pipes[2] = { 0xf0f0f0f0e1, 0xf0f0f0f0d2 };
+
+int toggle;
+void toggle_dot()
+{
+	gabi_goto(15,0);
+	if (toggle) gabi_data('.');
+	else gabi_data('|');
+	toggle^=1;
+}
 
 void reset_seq(){
 	seq=1;
@@ -93,11 +103,11 @@ void print_full_char(int n)
 void print_startup()
 {
 	gabi_clear();
+	_delay_ms(20);
 	print_full_char(5);
-	gabi_goto(5,0);
 	gabi_string((char*)"Welcome");
 	print_full_char(4);
-	gabi_goto(5,1);
+	gabi_goto(0,1);
 	print_full_char(5);
 	gabi_string((char*)"Gabi");
 	print_full_char(7);
@@ -108,6 +118,10 @@ void print_startup()
 	gabi_string((char*)META_MODULE);
 	gabi_string((char*)" Mod");
 	gabi_goto(0,1);
+	gabi_string((char*)"Firmware: ");
+	gabi_string((char*)META_FIRMWARE);
+	_delay_ms(DELAY_LCD_PRINT);
+	gabi_clear();
 	char str_id[4];
 	itoa(MY_ID,str_id,10);
 	gabi_string((char*)"My ID: ");
@@ -174,15 +188,20 @@ void setup(void)
 	pressed_counter = 0;
 	release_counter = 0;
 	button_last=0;
+	
+	print_startup();
+	start_timer1();
+	toggle=0;
 }
 
 int check_button_pressed()
 {
-	if (BUTTON_INPORT & (1<<BUTTON_PIN))
+	if (BUTTON_IN & (1<<BUTTON_PIN))
 	{
 		pressed_counter=0;
 		release_counter++;
 	} else {
+//		toggle_dot();
 		release_counter=0;
 		pressed_counter++;
 	}
@@ -222,6 +241,7 @@ void loop(void)
 				relays_power_off();
 			} else {
 				relays_power_on();
+				update_lcd_clock_print();
 			}
 			button_last=1;
 		}
@@ -234,6 +254,7 @@ void loop(void)
 	{
 		update_lcd_lm35_print();
 		timer1_fire=0;
+		toggle_dot();
 	}
 		
 	// if there is data ready
@@ -257,7 +278,7 @@ void loop(void)
 		uint8_t cur_id = ((got_pkg >> ID_BIT) & ID_MASK);
 		
 		//write_data(got_pkg);
-		print_read_write(R,got_pkg);
+		if (got_pkg != 0xFFFFFFFF) print_read_write(R,got_pkg);
 // 		 
 //   		char data_str[8];
 //   		itoa(cur_data,data_str,16);

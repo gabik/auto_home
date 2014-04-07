@@ -11,6 +11,7 @@
 
 #include "../lcd/lcd_lib.h"
 #include <stdlib.h>
+#include "../relay/relay.h"
 
 int overflow_count, timer1_fire;
 int p_sec, p_min, p_hour, p_of;
@@ -78,6 +79,7 @@ ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
 	if (overflow_count > 30) 
 	{
 		timer1_fire = 1;
+		overflow_count=0;
 	}
 }
 
@@ -108,6 +110,7 @@ ISR(TIMER2_COMPA_vect)          // timer compare interrupt service routine
 				p_min=0;
 			}
 			update_lcd_clock_print();
+			if (p_hour >= 2) relays_power_off();
 		}
 	}
 }

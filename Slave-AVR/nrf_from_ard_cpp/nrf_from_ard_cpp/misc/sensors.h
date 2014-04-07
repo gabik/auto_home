@@ -13,13 +13,13 @@
 #include "../lcd/lcd_lib.h"
 #include <util/delay.h>
 
-#define LM35_PIN PINB0
-#define PRI_PIN PINB1
+#define LM35_PIN PINC0
+#define PRI_PIN PINC1
 
 void init_ADC()
 {
-	DDRB &=~(1<<LM35_PIN);
-	DDRB &=~(1<<PRI_PIN);
+	DDRC &=~(1<<LM35_PIN);
+	DDRC &=~(1<<PRI_PIN);
 	ADMUX |= (1<<REFS0);
 	ADCSRA |= (1<<ADPS2)  | (1<<ADEN);
 }
