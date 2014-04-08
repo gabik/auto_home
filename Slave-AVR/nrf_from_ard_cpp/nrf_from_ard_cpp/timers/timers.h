@@ -12,8 +12,9 @@
 #include "../lcd/lcd_lib.h"
 #include <stdlib.h>
 #include "../relay/relay.h"
+#include "../misc/sensors.h"
 
-int overflow_count, timer1_fire;
+int timer1_fire;
 int p_sec, p_min, p_hour, p_of;
 
 void setup_timers()
@@ -31,7 +32,7 @@ void setup_timers()
 	TCCR1B = 0;
 	TCNT1  = 0;
 	OCR1A = 976;
-	//TCCR1B |= (1 << CS10) | (1 << CS12) | (1 << WGM12);     // prescaler 128, set CTC mode. with OCR 10000, TIMER1_COMPA_vect will fire every 1 second
+	//TCCR1B |= (1 << CS10) | (1 << CS12) | (1 << WGM12);     // prescaler 1024, set CTC mode. with OCR 10000, TIMER1_COMPA_vect will fire every 1 second
 	sei();
 	
 	p_sec=0;
@@ -80,12 +81,23 @@ void start_timer1()
 }
 
 ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
-{
+{	
 	overflow_count++;
+	if (LCD_UP == 1)
+	{
+		if (overflow_count > 10)
+		{
+			timer1_fire = 1;
+			overflow_count = 0;
+			LCD_UP_PORT &=~(1<<LCD_UP_BIT);
+			LCD_UP=0;
+		}
+	}
 	if (overflow_count > 30) 
 	{
 		timer1_fire = 1;
 		overflow_count=0;
+		PRI_sensor_counter=0;
 	}
 }
 

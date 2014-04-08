@@ -1,25 +1,28 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	1.9
+Firmware	:	1.91
 Date		:	07/07/14
 
 ToDO:
-? 1.79	60 minutes a hour instead 61
+V 1.79	60 minutes a hour instead 61
 V 1.8	auto power down on p_hour >= 2
 V 1.81	fix minutes to be 2 digits on uptime clock
-? 1.82	On will not restart clock if already on
-? 1.9	get temperture in C
-  1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
+V 1.82	On will not restart clock if already on
+V 1.9	get temperture in C
+V 1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
   1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
   1.93	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
+  1.94	Piezo on power on/off
   2.0	test all and remove print_read_write and printDetails on RPi
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "1.9"
+#define META_FIRMWARE "1.91"
 
 #define F_CPU 1000000
+
+int overflow_count;
 
 #include "nrf/nRF24L01.h"
 #include "nrf/RF24.h"
@@ -266,6 +269,8 @@ void loop(void)
 	} else {
 		button_last=0;
 	}
+	
+	handle_PRI();
 	
 	// Handle LM35
 	if (timer1_fire)
