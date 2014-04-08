@@ -51,12 +51,15 @@ void stop_timer2()
 
 void start_timer2()
 {
-	if (!get_relay1_emr_state())
+	if (get_relay1_emr_state() == 0)
 	{
 		TCNT2=0;
 		TCCR2A = (1 << WGM21);
 		TCCR2B = (1 << CS20) | (1 << CS22);     // prescaler 128, set CTC mode. with OCR 157, TIMER0_COMPA_vect will fire every 0.01 sec (100 OF = 1 Sec)
 		p_of=0;
+		p_hour=0;
+		p_min=0;
+		p_sec=0;
 		TIMSK2 |= (1 << OCIE2A);
 	}
 }
