@@ -60,9 +60,13 @@ void print_read_write(int read_write, unsigned long pkg);
 #define STAT_BIT 0
 #define STAT_MASK 1
 
+#define TEMP_MASK 0x7F // 7 bit
+#define TEMP_BIT 0
+
 // commands:
-//  send stat   seq- Id-- r/w                         .			 .=On/Off (1/0)
-//  send time   seq- Id-- r/w               | ||.. ....			 |=hours, .=minutes
+//	send temp	seq- id-- r/w                  ... ....			.=Temperture (0-127)
+//  send stat   seq- Id-- r/w                         .			.=On/Off (1/0)
+//  send time   seq- Id-- r/w               | ||.. ....			|=hours, .=minutes
 //  to me       seq- Id-- r/w                      -cmd
 //              3322 2222 2222 1111 1111 11 
 //              1098 7654 3210 9876 5432 1098 7654 3210
@@ -72,10 +76,11 @@ void print_read_write(int read_write, unsigned long pkg);
 #define ON 0x1 // ON = 0001
 #define OFF 0x0 // OFF = 0000
 
-#define R 0x0 // R = 0000
-#define PWR_STT 0x0 // Read Power State = ....0000
-#define P_TIME 0b0110 // Read Power On Timer 
-#define R_STATUS 0xF // Alive status = ....1111
+#define R			0x0		// R = 0000
+#define PWR_STT		0x0		// Read Power State = ....0000
+#define P_TIME		0b0110	// Read Power On Timer  ....0110
+#define R_STATUS	0xF		// Alive status = ....1111
+#define R_TEMP		0b1000	// Get temperture = ....1000
 
 #define DELAY_LCD_PRINT 1500
 #define BUTTON_DDR DDRC
@@ -359,6 +364,11 @@ void loop(void)
 								case R_STATUS: // status - alive
 									read_val = 1;
 									tmp_payload = (((uint32_t)(seq & SEQ_MASK) << SEQ_BIT) | ((uint32_t)(MY_ID & ID_MASK) << ID_BIT) | ((uint32_t)(R & RW_MASK) << RW_BIT) | ((uint32_t)(read_val & STAT_MASK) << STAT_BIT));
+									write_data(tmp_payload);
+									reset_seq();
+									break;
+								case R_TEMP:  // get temperture
+									tmp_payload = (((uint32_t)(seq & SEQ_MASK) << SEQ_BIT) | ((uint32_t)(MY_ID & ID_MASK) << ID_BIT) | ((uint32_t)(R & RW_MASK) << RW_BIT) | ((uint32_t)(tempC & TEMP_MASK) << TEMP_BIT));
 									write_data(tmp_payload);
 									reset_seq();
 									break;

@@ -16,12 +16,15 @@
 #define LM35_PIN PINC0
 #define PRI_PIN PINC1
 
+int tempC;
+
 void init_ADC()
 {
 	DDRC &=~(1<<LM35_PIN);
 	DDRC &=~(1<<PRI_PIN);
 	ADMUX |= (1<<REFS0);
 	ADCSRA |= (1<<ADPS2)  | (1<<ADEN);
+	tempC=0;
 }
 
 uint16_t ReadADC(uint8_t ADCchannel)
@@ -43,7 +46,7 @@ void update_lcd_lm35_print()
 	{
 		cur_read += ReadADC(0);
 	}
-	int tempC = ((cur_read/average_c*500)/1024);
+	tempC = ((cur_read/average_c*500)/1024);
 	char cur_str [4];
  	itoa(tempC,cur_str,10);
  	gabi_goto(12,1);
