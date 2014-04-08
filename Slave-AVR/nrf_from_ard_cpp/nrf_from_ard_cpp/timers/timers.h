@@ -102,15 +102,19 @@ ISR(TIMER2_COMPA_vect)          // timer compare interrupt service routine
 	{
 		p_sec++;
 		p_of=0;
-		if (p_sec > 60) {
+		if (p_sec > 59) {
 			p_min++;
 			p_sec=0;
-			if (p_min > 60) {
+			if (p_min > 59) {
 				p_hour++;
 				p_min=0;
 			}
 			update_lcd_clock_print();
-			if (p_hour >= 2) relays_power_off();
+			if (p_hour >= 2) 
+			{
+				relays_power_off();
+				stop_timer2();	
+			}
 		}
 	}
 }

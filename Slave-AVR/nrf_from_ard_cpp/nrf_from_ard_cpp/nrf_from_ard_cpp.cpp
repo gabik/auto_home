@@ -3,6 +3,15 @@ Module		:	Slave
 Type		:	Boiler Module.
 Firmware	:	1.8
 Date		:	07/07/14
+
+ToDO:
+V 1.8	auto power down on p_hour >= 2
+  1.81	fix minutes to be 2 digits on uptime clock
+  1.9	get temperture in C
+  1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
+  1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
+  1.93	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
+  2.0	test all and remove print_read_write
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
