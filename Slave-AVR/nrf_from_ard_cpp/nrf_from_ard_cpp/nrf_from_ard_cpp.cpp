@@ -1,12 +1,14 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	1.8
+Firmware	:	1.82
 Date		:	07/07/14
 
 ToDO:
+? 1.79	60 minutes a hour instead 61
 V 1.8	auto power down on p_hour >= 2
-  1.81	fix minutes to be 2 digits on uptime clock
+? 1.81	fix minutes to be 2 digits on uptime clock
+? 1.82	On will not restart clock if already on
   1.9	get temperture in C
   1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
   1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
@@ -15,7 +17,7 @@ V 1.8	auto power down on p_hour >= 2
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "1.8"
+#define META_FIRMWARE "1.82"
 
 #define F_CPU 1000000
 
@@ -248,6 +250,7 @@ void loop(void)
 			if (get_relay1_emr_state())
 			{
 				relays_power_off();
+				stop_timer2();
 			} else {
 				relays_power_on();
 				start_timer2();

@@ -51,11 +51,14 @@ void stop_timer2()
 
 void start_timer2()
 {
-	TCNT2=0;
-	TCCR2A = (1 << WGM21);
-	TCCR2B = (1 << CS20) | (1 << CS22);     // prescaler 128, set CTC mode. with OCR 157, TIMER0_COMPA_vect will fire every 0.01 sec (100 OF = 1 Sec)
-	p_of=0;
-	TIMSK2 |= (1 << OCIE2A);
+	if (!get_relay1_emr_state())
+	{
+		TCNT2=0;
+		TCCR2A = (1 << WGM21);
+		TCCR2B = (1 << CS20) | (1 << CS22);     // prescaler 128, set CTC mode. with OCR 157, TIMER0_COMPA_vect will fire every 0.01 sec (100 OF = 1 Sec)
+		p_of=0;
+		TIMSK2 |= (1 << OCIE2A);
+	}
 }
 
 void stop_timer1()
@@ -68,9 +71,9 @@ void stop_timer1()
 void start_timer1()
 {
 	TCNT1=0;
-	TCCR1B |= (1 << CS10) | (1 << WGM12) | (1 << CS12);     // prescaler 1024, set CTC mode. with OCR 976, TIMER1_COMPA_vect will fire every 1 Seconds. 
+	TCCR1B |= (1 << CS10) | (1 << WGM12) | (1 << CS12);     // prescaler 1024, set CTC mode. with OCR 976, TIMER1_COMPA_vect will fire every 1 Seconds.
 	overflow_count=0;
-	TIMSK1 |= (1 << OCIE1A);
+	TIMSK1 |= (1 << OCIE1A);		
 }
 
 ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
@@ -92,6 +95,7 @@ void update_lcd_clock_print()
 	itoa(p_min,tmp_minutes,10);
 	gabi_string(tmp_hour); 
 	gabi_data(':');
+	if (p_min < 10) gabi_data('0');
 	gabi_string(tmp_minutes);
 }
 
