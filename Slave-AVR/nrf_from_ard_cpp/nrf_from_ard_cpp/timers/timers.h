@@ -77,7 +77,15 @@ void start_timer1()
 	TCNT1=0;
 	TCCR1B |= (1 << CS10) | (1 << WGM12) | (1 << CS12);     // prescaler 1024, set CTC mode. with OCR 976, TIMER1_COMPA_vect will fire every 1 Seconds.
 	overflow_count=0;
-	TIMSK1 |= (1 << OCIE1A);		
+	TIMSK1 |= (1 << OCIE1A);
+}
+
+void fire_timer1_do()
+{
+	timer1_fire = 1;
+	overflow_count=0;
+	PRI_sensor_counter=0;	
+	RELAY2_SSR_PORT&=~(1<<RELAY2_SSR_PIN);
 }
 
 ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
@@ -87,17 +95,14 @@ ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
 	{
 		if (overflow_count > 10)
 		{
-			timer1_fire = 1;
-			overflow_count = 0;
+			fire_timer1_do();
 			LCD_UP_PORT &=~(1<<LCD_UP_BIT);
 			LCD_UP=0;
 		}
 	}
 	if (overflow_count > 30) 
 	{
-		timer1_fire = 1;
-		overflow_count=0;
-		PRI_sensor_counter=0;
+		fire_timer1_do();
 	}
 }
 

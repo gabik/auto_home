@@ -1,7 +1,7 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	1.91
+Firmware	:	1.93
 Date		:	07/07/14
 
 ToDO:
@@ -11,14 +11,14 @@ V 1.81	fix minutes to be 2 digits on uptime clock
 V 1.82	On will not restart clock if already on
 V 1.9	get temperture in C
 V 1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
-  1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
-  1.93	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
-  1.94	Piezo on power on/off
+V 1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
+V 1.93	Piezo on power on/off
+  1.94	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
   2.0	test all and remove print_read_write and printDetails on RPi
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "1.91"
+#define META_FIRMWARE "1.93"
 
 #define F_CPU 1000000
 
