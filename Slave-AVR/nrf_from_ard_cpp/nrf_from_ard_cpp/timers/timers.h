@@ -14,7 +14,7 @@
 #include "../relay/relay.h"
 #include "../misc/sensors.h"
 
-int timer1_fire;
+int timer1_fire, working_char;
 int p_sec, p_min, p_hour, p_of;
 
 void setup_timers()
@@ -40,6 +40,7 @@ void setup_timers()
 	p_hour=0;
 	p_of=0;	
 	timer1_fire=0;
+	working_char=0;
 }
 
 void stop_timer2()
@@ -48,6 +49,8 @@ void stop_timer2()
 	TCCR2B=0;
 	TCCR2A=0;
 	TIMSK2 &= ~(1 << OCIE2A);
+	gabi_goto(15,0);
+	gabi_data(' ');
 }
 
 void start_timer2()
@@ -119,6 +122,39 @@ void update_lcd_clock_print()
 	gabi_string(tmp_minutes);
 }
 
+void update_working_char()
+{
+	working_char++;
+	if (working_char > 4) working_char=1;
+	gabi_goto(15,0);
+	switch (working_char) {
+		case 1:
+		{
+			gabi_data('/');
+			break;
+		}
+		case 2:
+		{
+			gabi_data('-');
+			break;
+		}
+		case 3:
+		{
+			gabi_data('\\');
+			break;
+		}
+		case 4:
+		{
+			gabi_data('|');
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+}
+
 ISR(TIMER2_COMPA_vect)          // timer compare interrupt service routine
 {
 	p_of++;
@@ -126,6 +162,7 @@ ISR(TIMER2_COMPA_vect)          // timer compare interrupt service routine
 	{
 		p_sec++;
 		p_of=0;
+		update_working_char();
 		if (p_sec > 59) {
 			p_min++;
 			p_sec=0;

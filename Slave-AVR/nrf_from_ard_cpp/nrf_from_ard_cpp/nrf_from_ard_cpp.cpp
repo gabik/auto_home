@@ -1,7 +1,7 @@
 /*
 Module		:	Slave
 Type		:	Boiler Module.
-Firmware	:	1.93
+Firmware	:	2.0
 Date		:	07/07/14
 
 ToDO:
@@ -13,12 +13,12 @@ V 1.9	get temperture in C
 V 1.91	handle movement sensor to light the screen (as well as relay on/off will light the LCD)
 V 1.92	SSR-safe. check every 30 seconds that SSR is off - dont forget to handle poweron/off SSR so it will never be together (can use cli() sei())
 V 1.93	Piezo on power on/off
-  1.94	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
-  2.0	test all and remove print_read_write and printDetails on RPi
+? 1.94	turn off lcd blinking and think about pixel(15,0), maybe use /-\| every second or something
+? 2.0	test all and remove print_read_write and printDetails on RPi
 */
 #define META_MODULE "Slave"
 #define META_TYPE "Boiler"
-#define META_FIRMWARE "1.93"
+#define META_FIRMWARE "2.0"
 
 #define F_CPU 1000000
 
@@ -243,7 +243,7 @@ int write_data(unsigned long pkg) {
 	}
 	radio.startListening();
 
-	print_read_write(W,pkg);
+//	print_read_write(W,pkg);
 
 	return ret_val;
 }
@@ -301,7 +301,9 @@ void loop(void)
 		uint8_t cur_id = ((got_pkg >> ID_BIT) & ID_MASK);
 		
 		//write_data(got_pkg);
-		if (got_pkg != 0xFFFFFFFF) print_read_write(R,got_pkg);
+//		if (got_pkg != 0xFFFFFFFF) print_read_write(R,got_pkg);
+
+
 // 		 
 //   		char data_str[8];
 //   		itoa(cur_data,data_str,16);

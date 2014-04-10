@@ -107,6 +107,8 @@ Discarded input sections
  .bss           0x00000000        0x0 nrf_from_ard_cpp.o
  .text._Z11stop_timer1v
                 0x00000000       0x18 nrf_from_ard_cpp.o
+ .text._Z16print_read_writeim
+                0x00000000       0x6e nrf_from_ard_cpp.o
  .text._Z10print_byteh
                 0x00000000       0x3e nrf_from_ard_cpp.o
  .text          0x00000000        0x0 spi/spi.o
@@ -217,6 +219,8 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(itoa.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
+ .text.avr-libc
+                0x00000000       0x4a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
@@ -267,6 +271,8 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
+ .text.libgcc.div
+                0x00000000       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
@@ -419,7 +425,7 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1c98
+.text           0x00000000     0x1bea
  *(.vectors)
  .vectors       0x00000000       0x68 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vector_default
@@ -685,111 +691,105 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
                 0x00000ebc       0xa0 nrf_from_ard_cpp.o
                 0x00000ebc                _Z21update_lcd_lm35_printv
  .text._Z12setup_timersv
-                0x00000f5c       0x64 nrf_from_ard_cpp.o
+                0x00000f5c       0x6c nrf_from_ard_cpp.o
                 0x00000f5c                _Z12setup_timersv
  .text._Z11stop_timer2v
-                0x00000fc0       0x18 nrf_from_ard_cpp.o
-                0x00000fc0                _Z11stop_timer2v
+                0x00000fc8       0x26 nrf_from_ard_cpp.o
+                0x00000fc8                _Z11stop_timer2v
  .text._Z12start_timer2v
-                0x00000fd8       0x44 nrf_from_ard_cpp.o
-                0x00000fd8                _Z12start_timer2v
+                0x00000fee       0x44 nrf_from_ard_cpp.o
+                0x00000fee                _Z12start_timer2v
  .text._Z12start_timer1v
-                0x0000101c       0x26 nrf_from_ard_cpp.o
-                0x0000101c                _Z12start_timer1v
+                0x00001032       0x26 nrf_from_ard_cpp.o
+                0x00001032                _Z12start_timer1v
  .text._Z14fire_timer1_dov
-                0x00001042       0x20 nrf_from_ard_cpp.o
-                0x00001042                _Z14fire_timer1_dov
+                0x00001058       0x20 nrf_from_ard_cpp.o
+                0x00001058                _Z14fire_timer1_dov
  .text.__vector_11
-                0x00001062       0x86 nrf_from_ard_cpp.o
-                0x00001062                __vector_11
+                0x00001078       0x86 nrf_from_ard_cpp.o
+                0x00001078                __vector_11
  .text._Z22update_lcd_clock_printv
-                0x000010e8       0x82 nrf_from_ard_cpp.o
-                0x000010e8                _Z22update_lcd_clock_printv
+                0x000010fe       0x82 nrf_from_ard_cpp.o
+                0x000010fe                _Z22update_lcd_clock_printv
+ .text._Z19update_working_charv
+                0x00001180       0x70 nrf_from_ard_cpp.o
+                0x00001180                _Z19update_working_charv
  .text.__vector_7
-                0x0000116a       0xca nrf_from_ard_cpp.o
-                0x0000116a                __vector_7
+                0x000011f0       0xd6 nrf_from_ard_cpp.o
+                0x000011f0                __vector_7
  .text._Z9reset_seqv
-                0x00001234        0xe nrf_from_ard_cpp.o
-                0x00001234                _Z9reset_seqv
+                0x000012c6        0xe nrf_from_ard_cpp.o
+                0x000012c6                _Z9reset_seqv
  .text._Z15print_full_chari
-                0x00001242       0x2c nrf_from_ard_cpp.o
-                0x00001242                _Z15print_full_chari
+                0x000012d4       0x2c nrf_from_ard_cpp.o
+                0x000012d4                _Z15print_full_chari
  .text._Z20check_button_pressedv
-                0x0000126e       0x56 nrf_from_ard_cpp.o
-                0x0000126e                _Z20check_button_pressedv
- .text._Z16print_read_writeim
-                0x000012c4       0x6e nrf_from_ard_cpp.o
-                0x000012c4                _Z16print_read_writeim
+                0x00001300       0x56 nrf_from_ard_cpp.o
+                0x00001300                _Z20check_button_pressedv
  .text._Z10write_datam
-                0x00001332       0xac nrf_from_ard_cpp.o
-                0x00001332                _Z10write_datam
+                0x00001356       0x9c nrf_from_ard_cpp.o
+                0x00001356                _Z10write_datam
  .text._Z4loopv
-                0x000013de      0x2e6 nrf_from_ard_cpp.o
-                0x000013de                _Z4loopv
+                0x000013f2      0x2b2 nrf_from_ard_cpp.o
+                0x000013f2                _Z4loopv
  .text._Z9print_regPch
-                0x000016c4       0x44 nrf_from_ard_cpp.o
-                0x000016c4                _Z9print_regPch
+                0x000016a4       0x44 nrf_from_ard_cpp.o
+                0x000016a4                _Z9print_regPch
  .text._Z12print_statusv
-                0x00001708       0x4e nrf_from_ard_cpp.o
-                0x00001708                _Z12print_statusv
+                0x000016e8       0x4e nrf_from_ard_cpp.o
+                0x000016e8                _Z12print_statusv
  .text._Z13print_RX_ADDRh
-                0x00001756       0x80 nrf_from_ard_cpp.o
-                0x00001756                _Z13print_RX_ADDRh
+                0x00001736       0x80 nrf_from_ard_cpp.o
+                0x00001736                _Z13print_RX_ADDRh
  .text._Z13print_startupv
-                0x000017d6      0x1f2 nrf_from_ard_cpp.o
-                0x000017d6                _Z13print_startupv
+                0x000017b6      0x1f2 nrf_from_ard_cpp.o
+                0x000017b6                _Z13print_startupv
  .text._Z5setupv
-                0x000019c8       0xc4 nrf_from_ard_cpp.o
-                0x000019c8                _Z5setupv
- .text.main     0x00001a8c        0xa nrf_from_ard_cpp.o
-                0x00001a8c                main
+                0x000019a8       0xc4 nrf_from_ard_cpp.o
+                0x000019a8                _Z5setupv
+ .text.main     0x00001a6c        0xa nrf_from_ard_cpp.o
+                0x00001a6c                main
  .text._GLOBAL__sub_I_overflow_count
-                0x00001a96        0xe nrf_from_ard_cpp.o
+                0x00001a76        0xe nrf_from_ard_cpp.o
  .text._ZN8SPIClass5beginEv
-                0x00001aa4       0x1c spi/spi.o
-                0x00001aa4                _ZN8SPIClass5beginEv
+                0x00001a84       0x1c spi/spi.o
+                0x00001a84                _ZN8SPIClass5beginEv
  .text._ZN8SPIClass11setBitOrderEh
-                0x00001ac0       0x14 spi/spi.o
-                0x00001ac0                _ZN8SPIClass11setBitOrderEh
+                0x00001aa0       0x14 spi/spi.o
+                0x00001aa0                _ZN8SPIClass11setBitOrderEh
  .text._ZN8SPIClass11setDataModeEh
-                0x00001ad4        0xa spi/spi.o
-                0x00001ad4                _ZN8SPIClass11setDataModeEh
+                0x00001ab4        0xa spi/spi.o
+                0x00001ab4                _ZN8SPIClass11setDataModeEh
  .text._ZN8SPIClass15setClockDividerEh
-                0x00001ade       0x1e spi/spi.o
-                0x00001ade                _ZN8SPIClass15setClockDividerEh
+                0x00001abe       0x1e spi/spi.o
+                0x00001abe                _ZN8SPIClass15setClockDividerEh
  .text.libgcc.mul
-                0x00001afc       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_umulhisi3.o)
-                0x00001afc                __umulhisi3
- .text.libgcc   0x00001b14       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_adddi3_s8.o)
-                0x00001b14                __adddi3_s8
- .text.libgcc   0x00001b2c       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_cmpdi2_s8.o)
-                0x00001b2c                __cmpdi2_s8
- .text.libgcc   0x00001b44        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_tablejump.o)
-                0x00001b44                __tablejump2__
-                0x00001b48                __tablejump__
+                0x00001adc       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_umulhisi3.o)
+                0x00001adc                __umulhisi3
+ .text.libgcc   0x00001af4       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_adddi3_s8.o)
+                0x00001af4                __adddi3_s8
+ .text.libgcc   0x00001b0c       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_cmpdi2_s8.o)
+                0x00001b0c                __cmpdi2_s8
+ .text.libgcc   0x00001b24        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_tablejump.o)
+                0x00001b24                __tablejump2__
+                0x00001b28                __tablejump__
  .text.avr-libc
-                0x00001b50       0x42 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(itoa.o)
-                0x00001b50                itoa
+                0x00001b30       0x42 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00001b30                itoa
  .text.avr-libc
-                0x00001b92       0x4a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
-                0x00001b92                ultoa
+                0x00001b72       0x2c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
+                0x00001b72                utoa
  .text.avr-libc
-                0x00001bdc       0x2c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
-                0x00001bdc                utoa
- .text.avr-libc
-                0x00001c08       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x00001c08                strrev
+                0x00001b9e       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00001b9e                strrev
  .text.libgcc.div
-                0x00001c28       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x00001c28                __udivmodhi4
- .text.libgcc.div
-                0x00001c50       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001c50                __udivmodsi4
-                0x00001c94                . = ALIGN (0x2)
+                0x00001bbe       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00001bbe                __udivmodhi4
+                0x00001be6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001c94        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
-                0x00001c94                _exit
-                0x00001c94                exit
+ .fini9         0x00001be6        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+                0x00001be6                _exit
+                0x00001be6                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -808,11 +808,11 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001c94        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001be6        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001c98                _etext = .
+                0x00001bea                _etext = .
 
-.data           0x00800100       0x96 load address 0x00001c98
+.data           0x00800100       0x94 load address 0x00001bea
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
@@ -853,41 +853,43 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
  .rodata._ZL18child_payload_size
                 0x00800114        0x6 nrf/RF24.o
  .rodata.str1.1
-                0x0080011a       0x7b nrf_from_ard_cpp.o
-                                 0x7e (size before relaxing)
+                0x0080011a       0x7a nrf_from_ard_cpp.o
+                                 0x7d (size before relaxing)
  *(.gnu.linkonce.d*)
-                0x00800196                . = ALIGN (0x2)
- *fill*         0x00800195        0x1 
-                0x00800196                _edata = .
-                0x00800196                PROVIDE (__data_end, .)
+                0x00800194                . = ALIGN (0x2)
+                0x00800194                _edata = .
+                0x00800194                PROVIDE (__data_end, .)
 
-.bss            0x00800196       0x32
-                0x00800196                PROVIDE (__bss_start, .)
+.bss            0x00800194       0x34
+                0x00800194                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss._millis   0x00800196        0x8 nrf/RF24.o
-                0x00800196                _millis
+ .bss._millis   0x00800194        0x8 nrf/RF24.o
+                0x00800194                _millis
  .bss.button_last
-                0x0080019e        0x2 nrf_from_ard_cpp.o
-                0x0080019e                button_last
+                0x0080019c        0x2 nrf_from_ard_cpp.o
+                0x0080019c                button_last
  .bss.release_counter
-                0x008001a0        0x2 nrf_from_ard_cpp.o
-                0x008001a0                release_counter
+                0x0080019e        0x2 nrf_from_ard_cpp.o
+                0x0080019e                release_counter
  .bss.pressed_counter
-                0x008001a2        0x2 nrf_from_ard_cpp.o
-                0x008001a2                pressed_counter
- .bss.seq       0x008001a4        0x2 nrf_from_ard_cpp.o
-                0x008001a4                seq
- .bss.radio     0x008001a6       0x10 nrf_from_ard_cpp.o
-                0x008001a6                radio
- .bss.p_of      0x008001b6        0x2 nrf_from_ard_cpp.o
-                0x008001b6                p_of
- .bss.p_hour    0x008001b8        0x2 nrf_from_ard_cpp.o
-                0x008001b8                p_hour
- .bss.p_min     0x008001ba        0x2 nrf_from_ard_cpp.o
-                0x008001ba                p_min
- .bss.p_sec     0x008001bc        0x2 nrf_from_ard_cpp.o
-                0x008001bc                p_sec
+                0x008001a0        0x2 nrf_from_ard_cpp.o
+                0x008001a0                pressed_counter
+ .bss.seq       0x008001a2        0x2 nrf_from_ard_cpp.o
+                0x008001a2                seq
+ .bss.radio     0x008001a4       0x10 nrf_from_ard_cpp.o
+                0x008001a4                radio
+ .bss.p_of      0x008001b4        0x2 nrf_from_ard_cpp.o
+                0x008001b4                p_of
+ .bss.p_hour    0x008001b6        0x2 nrf_from_ard_cpp.o
+                0x008001b6                p_hour
+ .bss.p_min     0x008001b8        0x2 nrf_from_ard_cpp.o
+                0x008001b8                p_min
+ .bss.p_sec     0x008001ba        0x2 nrf_from_ard_cpp.o
+                0x008001ba                p_sec
+ .bss.working_char
+                0x008001bc        0x2 nrf_from_ard_cpp.o
+                0x008001bc                working_char
  .bss.timer1_fire
                 0x008001be        0x2 nrf_from_ard_cpp.o
                 0x008001be                timer1_fire
@@ -903,8 +905,8 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
                 0x008001c6                overflow_count
  *(COMMON)
                 0x008001c8                PROVIDE (__bss_end, .)
-                0x00001c98                __data_load_start = LOADADDR (.data)
-                0x00001d2e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001bea                __data_load_start = LOADADDR (.data)
+                0x00001c7e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008001c8        0x0
                 0x008001c8                PROVIDE (__noinit_start, .)
@@ -932,22 +934,22 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x00000000     0x1218
+.stab           0x00000000     0x1050
  *(.stab)
  .stab          0x00000000      0x6cc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
  .stab          0x000006cc      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(itoa.o)
                                 0x1bc (size before relaxing)
- .stab          0x0000087c      0x1e0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
+ .stab          0x0000087c       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa.o)
                                 0x1ec (size before relaxing)
- .stab          0x00000a5c      0x12c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
+ .stab          0x00000894      0x12c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(utoa.o)
                                 0x138 (size before relaxing)
- .stab          0x00000b88       0x9c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .stab          0x000009c0       0x9c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
                                  0xa8 (size before relaxing)
- .stab          0x00000c24       0x9c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .stab          0x00000a5c       0x9c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
                                  0xa8 (size before relaxing)
- .stab          0x00000cc0       0xd8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .stab          0x00000af8       0xd8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(strrev.o)
                                  0xe4 (size before relaxing)
- .stab          0x00000d98      0x480 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .stab          0x00000bd0      0x480 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
                                 0x48c (size before relaxing)
 
 .stabstr        0x00000000      0x3dc
@@ -990,38 +992,38 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x448
+.debug_aranges  0x00000000      0x450
  *(.debug_aranges)
  .debug_aranges
                 0x00000000      0x1e8 nrf/RF24.o
  .debug_aranges
-                0x000001e8      0x188 nrf_from_ard_cpp.o
+                0x000001e8      0x190 nrf_from_ard_cpp.o
  .debug_aranges
-                0x00000370       0x40 spi/spi.o
+                0x00000378       0x40 spi/spi.o
  .debug_aranges
-                0x000003b0       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+                0x000003b8       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
  .debug_aranges
-                0x000003d0       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+                0x000003d8       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
  .debug_aranges
-                0x000003f0       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000003f8       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
  .debug_aranges
-                0x00000410       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000418       0x20 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
  .debug_aranges
-                0x00000430       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
+                0x00000438       0x18 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x6a08
+.debug_info     0x00000000     0x6a91
  *(.debug_info)
  .debug_info    0x00000000     0x3151 nrf/RF24.o
- .debug_info    0x00003151     0x2b12 nrf_from_ard_cpp.o
- .debug_info    0x00005c63      0x1f7 spi/spi.o
- .debug_info    0x00005e5a      0x1fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
- .debug_info    0x00006054      0x1a9 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
- .debug_info    0x000061fd      0x549 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .debug_info    0x00006746      0x174 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
- .debug_info    0x000068ba      0x14e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
+ .debug_info    0x00003151     0x2b9b nrf_from_ard_cpp.o
+ .debug_info    0x00005cec      0x1f7 spi/spi.o
+ .debug_info    0x00005ee3      0x1fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_info    0x000060dd      0x1a9 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_info    0x00006286      0x549 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_info    0x000067cf      0x174 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_info    0x00006943      0x14e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000     0x10d0
@@ -1035,55 +1037,55 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
  .debug_abbrev  0x00000f1e       0xf1 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
  .debug_abbrev  0x0000100f       0xc1 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
 
-.debug_line     0x00000000     0x19d5
+.debug_line     0x00000000     0x19f5
  *(.debug_line)
  .debug_line    0x00000000      0x86b nrf/RF24.o
- .debug_line    0x0000086b      0x860 nrf_from_ard_cpp.o
- .debug_line    0x000010cb      0x124 spi/spi.o
- .debug_line    0x000011ef      0x18e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
- .debug_line    0x0000137d      0x110 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
- .debug_line    0x0000148d      0x359 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .debug_line    0x000017e6      0x104 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
- .debug_line    0x000018ea       0xeb c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
+ .debug_line    0x0000086b      0x880 nrf_from_ard_cpp.o
+ .debug_line    0x000010eb      0x124 spi/spi.o
+ .debug_line    0x0000120f      0x18e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_line    0x0000139d      0x110 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_line    0x000014ad      0x359 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_line    0x00001806      0x104 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_line    0x0000190a       0xeb c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
 
-.debug_frame    0x00000000      0xe2c
+.debug_frame    0x00000000      0xe28
  *(.debug_frame)
  .debug_frame   0x00000000      0x788 nrf/RF24.o
- .debug_frame   0x00000788      0x558 nrf_from_ard_cpp.o
- .debug_frame   0x00000ce0       0x64 spi/spi.o
- .debug_frame   0x00000d44       0x2c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
- .debug_frame   0x00000d70       0x38 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
- .debug_frame   0x00000da8       0x4c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .debug_frame   0x00000df4       0x38 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_frame   0x00000788      0x554 nrf_from_ard_cpp.o
+ .debug_frame   0x00000cdc       0x64 spi/spi.o
+ .debug_frame   0x00000d40       0x2c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_frame   0x00000d6c       0x38 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_frame   0x00000da4       0x4c c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_frame   0x00000df0       0x38 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
 
-.debug_str      0x00000000     0x1810
+.debug_str      0x00000000     0x183d
  *(.debug_str)
  .debug_str     0x00000000      0xe1b nrf/RF24.o
                                 0xf4e (size before relaxing)
- .debug_str     0x00000e1b      0x725 nrf_from_ard_cpp.o
-                               0x1256 (size before relaxing)
- .debug_str     0x00001540       0x27 spi/spi.o
+ .debug_str     0x00000e1b      0x752 nrf_from_ard_cpp.o
+                               0x1290 (size before relaxing)
+ .debug_str     0x0000156d       0x27 spi/spi.o
                                 0x23d (size before relaxing)
- .debug_str     0x00001567       0xb8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_str     0x00001594       0xb8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
                                 0x140 (size before relaxing)
- .debug_str     0x0000161f       0x61 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_str     0x0000164c       0x61 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
                                 0x10a (size before relaxing)
- .debug_str     0x00001680       0xce c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_str     0x000016ad       0xce c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
                                 0x1ad (size before relaxing)
- .debug_str     0x0000174e       0x62 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_str     0x0000177b       0x62 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
                                 0x10d (size before relaxing)
- .debug_str     0x000017b0       0x60 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
+ .debug_str     0x000017dd       0x60 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(iob.o)
                                 0x10d (size before relaxing)
 
-.debug_loc      0x00000000     0x3c22
+.debug_loc      0x00000000     0x3df9
  *(.debug_loc)
  .debug_loc     0x00000000     0x2497 nrf/RF24.o
- .debug_loc     0x00002497     0x101f nrf_from_ard_cpp.o
- .debug_loc     0x000034b6       0x7c spi/spi.o
- .debug_loc     0x00003532       0x21 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
- .debug_loc     0x00003553       0xbf c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
- .debug_loc     0x00003612      0x51d c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .debug_loc     0x00003b2f       0xf3 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_loc     0x00002497     0x11f6 nrf_from_ard_cpp.o
+ .debug_loc     0x0000368d       0x7c spi/spi.o
+ .debug_loc     0x00003709       0x21 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_loc     0x0000372a       0xbf c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_loc     0x000037e9      0x51d c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_loc     0x00003d06       0xf3 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1091,15 +1093,15 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x3c0
+.debug_ranges   0x00000000      0x3c8
  *(.debug_ranges)
  .debug_ranges  0x00000000      0x1d8 nrf/RF24.o
- .debug_ranges  0x000001d8      0x178 nrf_from_ard_cpp.o
- .debug_ranges  0x00000350       0x30 spi/spi.o
- .debug_ranges  0x00000380       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
- .debug_ranges  0x00000390       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
- .debug_ranges  0x000003a0       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .debug_ranges  0x000003b0       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .debug_ranges  0x000001d8      0x180 nrf_from_ard_cpp.o
+ .debug_ranges  0x00000358       0x30 spi/spi.o
+ .debug_ranges  0x00000388       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(printf.o)
+ .debug_ranges  0x00000398       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(puts.o)
+ .debug_ranges  0x000003a8       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .debug_ranges  0x000003b8       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a(fputc.o)
 
 .debug_macro
  *(.debug_macro)

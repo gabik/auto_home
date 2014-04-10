@@ -75,7 +75,7 @@ void gabi_string(char*);
 #define lcd_Home            0b00000010          // return cursor to first position on first line
 #define lcd_EntryMode       0b00000110          // shift cursor from left to right on read/write
 #define lcd_DisplayOff      0b00001000          // turn display off
-#define lcd_DisplayOn       0b00001111          // display on, cursor on, blink character
+#define lcd_DisplayOn       0b00001100          // display on, cursor on, blink character (change last 00 to 11 to show cursor and blink)
 #define lcd_FunctionReset   0b00110000          // reset the LCD
 #define lcd_FunctionSet4bit 0b00101000          // 4-bit data, 2-line display, 5 x 7 font
 #define lcd_SetCursor       0b10000000          // set cursor position
