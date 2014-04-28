@@ -24,6 +24,10 @@
 0x80+X set cursor position
 
 Connection: D[7-4]-PD[7-4], E-PD2, RW-PD1, RS-PD0
+
+GDRAM:
+0-3: special on character
+4: curret hebrew char
 */
 
 #ifndef LCD_LIB_H_
@@ -75,7 +79,7 @@ void gabi_string(char*);
 #define lcd_Home            0b00000010          // return cursor to first position on first line
 #define lcd_EntryMode       0b00000110          // shift cursor from left to right on read/write
 #define lcd_DisplayOff      0b00001000          // turn display off
-#define lcd_DisplayOn       0b00001100          // display on, cursor on, blink character (change last 00 to 11 to show cursor and blink)
+#define lcd_DisplayOn       0b00001111          // display on, cursor on, blink character (change last 00 to 11 to show cursor and blink)
 #define lcd_FunctionReset   0b00110000          // reset the LCD
 #define lcd_FunctionSet4bit 0b00101000          // 4-bit data, 2-line display, 5 x 7 font
 #define lcd_SetCursor       0b10000000          // set cursor position
@@ -87,6 +91,76 @@ void gabi_string(char*);
 #define E_HIGH lcd_E_port |= (1<<lcd_E_bit)
 #define RW_LOW lcd_RW_port &= ~(1<<lcd_RW_bit)
 #define RW_HIGH lcd_RW_port |= (1<<lcd_RW_bit)
+
+char special_char[4][8] = {
+	{ 18 , 9  , 18 , 8 , 17 , 17 , 17 , 31 }, 
+	{ 9  , 18 , 9  , 2 , 17 , 17 , 31 , 31 }, 
+	{ 18 , 9  , 18 , 8 , 17 , 31 , 31 , 31 }, 
+	{ 9  , 18 , 9  , 0 , 31 , 31 , 31 , 31 }
+};
+
+char hebrew[31][8] = {
+	{19, 25, 13, 22, 19, 17, 25, 0 }, // Alef = 0
+	{30, 30, 2,  2,  2,  31, 31, 0 }, // Bet = 1
+	{31, 31, 1,  31, 31, 17, 17, 0 }, // Gimel = 2
+	{31, 31, 2,  2,  2,  2,  2,  0 }, // Dalet = 3
+	{31, 31, 1,  1,  17, 17, 17, 0 }, // He = 4
+	{3,  3,  1,  1,  1,  1,  1,  0 }, // Vav = 5
+	{31, 31, 4,  6,  2,  6,  4,  0 }, // Zain = 6
+	{31, 31, 17, 17, 17, 17, 17, 0 }, // Het = 7
+	{19, 23, 21, 17, 17, 31, 31, 0 }, // Tet = 8
+	{3,  3,  1,  0,  0,  0,  0,  0 }, // Yod = 9
+	{31, 31, 1,  1,  1,  31, 31, 0 }, // Kaf = 10
+	{16, 31, 31, 1,  1,  2,  28, 0 }, // Lamed = 11
+	{16, 28, 30, 19, 17, 17, 23, 0 }, // Mem = 12
+	{7,  7,  1,  1,  1,  31, 31, 0 }, // Nun = 13
+	{31, 31, 17, 17, 17, 17, 14, 0 }, // Sameh = 14
+	{27, 27, 9,  13, 5,  31, 31, 0 }, // Ain = 15
+	{31, 31, 9,  13, 1,  31, 31, 0 }, // Pe = 16
+	{27, 13, 6,  3,  1,  31, 31, 0 }, // Zadik = 17
+	{31, 31, 1,  1,  17, 19, 22, 16}, // Kuf = 18
+	{31, 31, 1,  1,  1,  1,  1,  0 }, // Resh = 19
+	{21, 21, 21, 29, 17, 31, 31, 0 }, // Shin = 20
+	{15, 15, 9,  9,  9,  25, 25, 0 }, // Taf = 21
+	{15, 15, 1,  1,  1,  1,  1,  1 }, // Final Kaf = 22
+	{31, 31, 17, 17, 17, 31, 31, 0 }, // Final Mem = 23
+	{3,  3,  1,  1,  1,  1,  1,  1 }, // Final Nun = 24
+	{31, 31, 17, 25, 25, 1,  1,  1 }, // Final Pe = 25
+	{27, 9,  13, 6,  3,  1,  1,  1 }, // Final Zadik = 26	
+	{ 18 , 9  , 18 , 8 , 17 , 17 , 17 , 31 }, // Special 0
+	{ 9  , 18 , 9  , 2 , 17 , 17 , 31 , 31 }, // Special 1
+	{ 18 , 9  , 18 , 8 , 17 , 31 , 31 , 31 }, // Special 2
+	{ 9  , 18 , 9  , 0 , 31 , 31 , 31 , 31 }  // Special 3					
+};
+
+#define ALEF 0
+#define BET 1
+#define GIMEL 2
+#define DALET 3
+#define HEY 4
+#define VAV 5
+#define ZAIN 6
+#define HET 7
+#define TET 8
+#define YOD 9
+#define KAF 10
+#define LAMED 11
+#define MEM 12
+#define NUN 13
+#define SAMEH 14
+#define AIN 15
+#define PEH 16
+#define ZADIK 17
+#define KUF 18
+#define RESH 19
+#define SHIN 20
+#define TAF 21
+#define FINAL_KAF 22
+#define FINAL_MEM 23
+#define FINAL_NUN 24
+#define FINAL_PEH 25
+#define FINAL_ZADIK 26
+#define SPECIAL_START 27
 
 void lcd_init(void)
 {
@@ -249,6 +323,27 @@ void gabi_string(char *data)
 	{
 		gabi_data(*data);
 		data++;
+	}
+}
+
+void add_special_char(int pos,  char *data)
+{
+	gabi_cmd(0x40 + (pos*8));
+	for (int i=0; i<8; i++)
+		gabi_data(data[i]);
+	//gabi_cmd(0x80);
+}
+
+void gabi_heb(int x, int y, int len, int* heb_phase)
+{
+	if (len <= 7)
+	{
+		for (int i=len-1 ; i>=0 ; i--)
+		{
+			add_special_char(i+1,hebrew[heb_phase[i]]);
+			gabi_goto(x++,y);
+			gabi_data(i+1);	
+		}
 	}
 }
 
