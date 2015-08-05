@@ -5,9 +5,31 @@
 #include "../RF24.h"
 
 #define MSLEEP __msleep(5)
+#define DATA_PAYLOAD 2
+#define nrf_PAYLOAD 2
 
-uint8_t nrf_send(uint8_t& slave_id, uint8_t& num);
-uint8_t nrf_get(uint8_t& data);
+void nrf_send(uint8_t& slave_id, uint8_t& num)
+{
+    uint8_t xorb;
+    uint8_t raw[4];
+    xorb=slave_id;
+    for (int i=0; i<DATA_PAYLOAD; i++) xorb^=num;
+    raw[0]=slave_id;
+    raw[1]=num;
+    raw[2]=num;
+    raw[3]=xorb;
+    radio.stopListening();
+    prinf("Sending ");
+    for (int i=0 ;i<nrf_PAYLOAD, i++) printf("%i ");
+    bool stt = radio.write(raw, nrf_PAYLOAD);
+    printf(stt ? "true" : "false");
+    printf("\n\r");
+}
+
+void nrf_get(uint8_t& data)
+{
+    radio.write(&data, nrf_PAYLOD);
+}
 
 RF24 radio("/dev/spidev0.0",2000000 , 25);
 const uint64_t pipes[2] = { 0xF0F0F0F0F0LL, 0xF1F1F1F1F1LL }; // TX: RX=0 TX=1 , RX: RX=1, TX=0
